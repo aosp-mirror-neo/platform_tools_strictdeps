@@ -1,4 +1,3 @@
-//
 // Copyright (C) 2026 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,13 +11,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-//
+
+package {
+    default_team: "trendy_team_build",
+}
 
 java_library_host {
     name: "soong_java_strict_deps_plugin_lib",
     srcs: ["src/**/*.java"],
     libs: ["auto_service_annotations"],
     plugins: ["auto_service_plugin"],
+    javacflags: [
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+    ],
 }
 
 java_plugin {
@@ -34,5 +42,4 @@ java_test_host {
         "junit",
     ],
     test_suites: ["general-tests"],
-    team: "trendy_team_build",
 }
